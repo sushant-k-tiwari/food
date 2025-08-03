@@ -1,29 +1,25 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { createStackNavigator } from "@react-navigation/stack";
+import React from "react";
+import SearchScreen from "./screens/SearchScreen";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+const Stack = createStackNavigator();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Stack.Navigator
+      initialRouteName="Business Search"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#daddf0ff",
+          height: 100,
+        },
+        headerTitleStyle: {
+          fontSize: 22,
+        },
+        headerTitleAlign: "center",
+      }}
+    >
+      <Stack.Screen name="Business Search" component={SearchScreen} />
+    </Stack.Navigator>
   );
 }
