@@ -1,26 +1,16 @@
-import yelp from "@/api/yelp";
+import ResultsList from "@/components/Results";
 import SearchBar from "@/components/SearchBar";
+import useResults from "@/hooks/useResults";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 const SearchScreen = () => {
   const [term, setTerm] = useState("");
-  const [results, setResults] = useState([]);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [searchApi, results, errorMessage] = useResults();
 
-  const searchApi = async (searchTerm: string) => {
-    try {
-      const response = await yelp.get("/search", {
-        params: {
-          limit: 20,
-          term: searchTerm,
-          location: "san jose",
-        },
-      });
-
-      setResults(response.data.businesses);
-    } catch (err) {
-      setErrorMessage("Something went wrong");
-    }
+  const filterResultsByPrice = (price: string) => {
+    return results.filter((result) => {
+      return result.price === price;
+    });
   };
 
   return (
@@ -45,6 +35,9 @@ const SearchScreen = () => {
         </Text>
       ) : null}
       <Text>We have found {results.length} results.</Text>
+      <ResultsList results={filterResultsByPrice("$")} title="Cost Effective" />
+      <ResultsList results={filterResultsByPrice("$$")} title="Bit Pricier" />
+      <ResultsList results={filterResultsByPrice("$$$")} title="Big Spender" />
     </View>
   );
 };
