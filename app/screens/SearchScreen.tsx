@@ -2,7 +2,8 @@ import ResultsList from "@/components/Results";
 import SearchBar from "@/components/SearchBar";
 import useResults from "@/hooks/useResults";
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text } from "react-native";
+
 const SearchScreen = () => {
   const [term, setTerm] = useState("");
   const [searchApi, results, errorMessage] = useResults();
@@ -14,7 +15,7 @@ const SearchScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <>
       <SearchBar
         term={term}
         onTermChange={(newTerm) => setTerm(newTerm)}
@@ -34,7 +35,6 @@ const SearchScreen = () => {
           {errorMessage}
         </Text>
       ) : null}
-      <Text>We have found {results.length} results.</Text>
       <ScrollView>
         <ResultsList
           results={filterResultsByPrice("$")}
@@ -46,7 +46,7 @@ const SearchScreen = () => {
           title="Big Spender"
         />
       </ScrollView>
-    </View>
+    </>
   );
 };
 

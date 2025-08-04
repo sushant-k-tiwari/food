@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import ResultsShowScreen from "./screens/ResultsShowScreen";
 import SearchScreen from "./screens/SearchScreen";
 
 const Stack = createStackNavigator();
@@ -20,6 +21,11 @@ export default function RootLayout() {
       }}
     >
       <Stack.Screen name="Business Search" component={SearchScreen} />
+      <Stack.Screen
+        name="ResultsShow"
+        component={ResultsShowScreen}
+        options={{ title: "Business Search" }}
+      />
     </Stack.Navigator>
   );
 }

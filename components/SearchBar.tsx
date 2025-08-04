@@ -29,7 +29,7 @@ export default SearchBar;
 const styles = StyleSheet.create({
   background: {
     backgroundColor: "#f0EEEE",
-    margin: 15,
+    margin: 10,
     height: 50,
     borderRadius: 12,
     flexDirection: "row",

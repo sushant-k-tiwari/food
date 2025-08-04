@@ -2,6 +2,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
+
 interface Props {
   result: any;
 }
