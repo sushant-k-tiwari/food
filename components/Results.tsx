@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
+import ResultDetails from "./ResultDetails";
 
 interface Props {
   title: string;
@@ -7,7 +8,7 @@ interface Props {
 }
 const ResultsList: FC<Props> = ({ title, results }) => {
   return (
-    <View>
+    <View style={{ marginBottom: 10 }}>
       <Text style={styles.title}>{title}</Text>
       <FlatList
         horizontal
@@ -15,7 +16,7 @@ const ResultsList: FC<Props> = ({ title, results }) => {
         data={results}
         keyExtractor={(result) => result.id}
         renderItem={({ item }) => {
-          return <Text>{item.name}</Text>;
+          return <ResultDetails result={item} />;
         }}
       />
     </View>
@@ -28,5 +29,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    marginHorizontal: 10,
+    marginBottom: 5,
   },
 });
